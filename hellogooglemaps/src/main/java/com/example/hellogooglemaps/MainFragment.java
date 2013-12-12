@@ -23,11 +23,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.R;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -51,7 +51,6 @@ public  class MainFragment extends SherlockFragment  implements
         GooglePlayServicesClient.ConnectionCallbacks,
         GooglePlayServicesClient.OnConnectionFailedListener {
 
-
         // A request to connect to Location Services
         private LocationRequest mLocationRequest;
 
@@ -64,7 +63,10 @@ public  class MainFragment extends SherlockFragment  implements
         private ProgressBar mActivityIndicator;
         private TextView mConnectionState;
         private TextView mConnectionStatus;
-
+        private Button mGetLocation;
+        private Button mStartUpdate;
+        private Button mStopUpdate;
+        private Button mGetAddress;
         // Handle to SharedPreferences for this app
         SharedPreferences mPrefs;
 
@@ -76,7 +78,7 @@ public  class MainFragment extends SherlockFragment  implements
      * method handleRequestSuccess of LocationUpdateReceiver.
      *
      */
-        boolean mUpdatesRequested = false;
+    boolean mUpdatesRequested = false;
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
@@ -109,7 +111,10 @@ public  class MainFragment extends SherlockFragment  implements
         mActivityIndicator = (ProgressBar) rootView.findViewById(R.id.address_progress);
         mConnectionState = (TextView) rootView.findViewById(R.id.text_connection_state);
         mConnectionStatus = (TextView) rootView.findViewById(R.id.text_connection_status);
-
+        mGetLocation= (Button)rootView.findViewById(R.id.get_location_button);
+        mStartUpdate= (Button)rootView.findViewById(R.id.start_updates);
+        mStopUpdate= (Button)rootView.findViewById(R.id.stop_updates);
+        mGetAddress= (Button)rootView.findViewById(R.id.get_address_button);
         // Create a new global location parameters object
         mLocationRequest = LocationRequest.create();
 
@@ -138,6 +143,30 @@ public  class MainFragment extends SherlockFragment  implements
          * handle callbacks.
          */
         mLocationClient = new LocationClient(this.getSherlockActivity(), this, this);
+        mGetLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getLocation(view);
+            }
+        });
+        mGetAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getAddress(view);
+            }
+        });
+        mStartUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startUpdates(view);
+            }
+        });
+        mStopUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                stopUpdates(view);
+            }
+        });
         return rootView;
     }
 
@@ -163,7 +192,6 @@ public  class MainFragment extends SherlockFragment  implements
     public void onStart() {
 
         super.onStart();
-
         /*
          * Connect the client. Don't re-start any requests here;
          * instead, wait for onResume()
@@ -199,17 +227,13 @@ public  class MainFragment extends SherlockFragment  implements
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-
         // Choose what to do based on the request code
         switch (requestCode) {
-
             // If the request code matches the code sent in onConnectionFailed
             case LocationUtils.CONNECTION_FAILURE_RESOLUTION_REQUEST :
-
                 switch (resultCode) {
                     // If Google Play services resolved the problem
                     case Activity.RESULT_OK:
-
                         // Log the result
                         Log.d(LocationUtils.APPTAG, getString(R.string.resolved));
 
@@ -249,7 +273,7 @@ public  class MainFragment extends SherlockFragment  implements
 
         // Check that Google Play services is available
         int resultCode =
-                GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+                GooglePlayServicesUtil.isGooglePlayServicesAvailable(this.getSherlockActivity());
 
         // If Google Play services is available
         if (ConnectionResult.SUCCESS == resultCode) {
@@ -310,13 +334,10 @@ public  class MainFragment extends SherlockFragment  implements
         }
 
         if (servicesConnected()) {
-
             // Get the current location
             Location currentLocation = mLocationClient.getLastLocation();
-
             // Turn the indefinite activity indicator on
             mActivityIndicator.setVisibility(View.VISIBLE);
-
             // Start the background task
             (new MainFragment.GetAddressTask(this.getSherlockActivity())).execute(currentLocation);
         }
@@ -511,8 +532,7 @@ public  class MainFragment extends SherlockFragment  implements
                  * longitude of the current location. Return at most 1 address.
                  */
                 addresses = geocoder.getFromLocation(location.getLatitude(),
-                        location.getLongitude(), 1
-                );
+                        location.getLongitude(), 1);
 
                 // Catch network or other I/O problems.
             } catch (IOException exception1) {

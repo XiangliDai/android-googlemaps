@@ -16,9 +16,11 @@
 
 package com.example.hellogooglemaps.location;
 
-import com.google.android.gms.common.ConnectionResult;
 import android.content.Context;
 import android.content.res.Resources;
+
+import com.example.hellogooglemaps.R;
+import com.google.android.gms.common.ConnectionResult;
 
 
 /**

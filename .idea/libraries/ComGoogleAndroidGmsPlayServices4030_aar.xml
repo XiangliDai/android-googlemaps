@@ -3,6 +3,9 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/hellogooglemaps/build/exploded-bundles/ComGoogleAndroidGmsPlayServices4030.aar/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/hellogooglemaps/build/exploded-bundles/ComGoogleAndroidGmsPlayServices4030.aar/res" />
+      <root url="jar://$PROJECT_DIR$/hellogooglemaps/build/exploded-bundles/ComGoogleAndroidGmsPlayServices4030.aar/classes.jar!/" />
+      <root url="jar://$PROJECT_DIR$/hellogooglemaps/build/exploded-bundles/ComGoogleAndroidGmsPlayServices4030.aar/classes.jar!/" />
+      <root url="jar://$PROJECT_DIR$/hellogooglemaps/build/exploded-bundles/ComGoogleAndroidGmsPlayServices4030.aar/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

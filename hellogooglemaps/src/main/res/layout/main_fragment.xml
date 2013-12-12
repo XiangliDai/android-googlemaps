@@ -76,7 +76,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_connection_state"
         android:layout_centerHorizontal="true"
-        android:onClick="getLocation"
         android:layout_marginTop="10dp"
         android:text="@string/get_location" />
 
@@ -86,7 +85,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/get_address_button"
         android:layout_centerHorizontal="true"
-        android:onClick="startUpdates"
         android:text="@string/start_updates" />
 
     <Button
@@ -95,7 +93,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/get_location_button"
         android:layout_centerHorizontal="true"
-        android:onClick="getAddress"
         android:text="@string/get_address" />
 
     <Button
@@ -106,7 +103,6 @@
         android:layout_below="@+id/start_updates"
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical|center_horizontal"
-        android:onClick="stopUpdates"
         android:text="@string/stop_updates" />
 
 </RelativeLayout>

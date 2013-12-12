@@ -1,10 +1,8 @@
 package com.example.hellogooglemaps;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
-import com.actionbarsherlock.R;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 

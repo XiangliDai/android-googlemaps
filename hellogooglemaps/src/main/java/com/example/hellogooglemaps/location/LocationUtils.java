@@ -19,6 +19,9 @@ package com.example.hellogooglemaps.location;
 import android.content.Context;
 import android.location.Location;
 
+import com.example.hellogooglemaps.R;
+
+
 /**
  * Defines app-wide constants and utilities
  */

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/libraries/actionbarsherlock/actionbarsherlock.iml" filepath="$PROJECT_DIR$/libraries/actionbarsherlock/actionbarsherlock.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-googlemaps.iml" filepath="$PROJECT_DIR$/android-googlemaps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hellogooglemaps/hellogooglemaps.iml" filepath="$PROJECT_DIR$/hellogooglemaps/hellogooglemaps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libraries/libraries.iml" filepath="$PROJECT_DIR$/libraries/libraries.iml" />
+    </modules>
+  </component>
+</project>
+
