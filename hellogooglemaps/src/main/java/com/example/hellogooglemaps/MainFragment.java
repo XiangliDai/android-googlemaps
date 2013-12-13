@@ -44,7 +44,9 @@ public  class MainFragment extends SherlockFragment  implements
         LocationListener,
         GooglePlayServicesClient.ConnectionCallbacks,
         GooglePlayServicesClient.OnConnectionFailedListener {
-
+    public static  String EXTRA_LAT = "lat";
+    public static  String EXTRA_LNG = "lng";
+    private static final int REQUEST_GEOFENCE = 0;
         // A request to connect to Location Services
         private LocationRequest mLocationRequest;
 
@@ -61,6 +63,7 @@ public  class MainFragment extends SherlockFragment  implements
         private Button mStartUpdate;
         private Button mStopUpdate;
         private Button mGetAddress;
+        private Button mLaunchGeofence;
         // Handle to SharedPreferences for this app
         SharedPreferences mPrefs;
 
@@ -100,6 +103,7 @@ public  class MainFragment extends SherlockFragment  implements
         mStartUpdate= (Button)rootView.findViewById(R.id.start_updates);
         mStopUpdate= (Button)rootView.findViewById(R.id.stop_updates);
         mGetAddress= (Button)rootView.findViewById(R.id.get_address_button);
+        mLaunchGeofence = (Button)rootView.findViewById(R.id.launch_geofence);
         // Create a new global location parameters object
         mLocationRequest = LocationRequest.create();
 
@@ -150,6 +154,17 @@ public  class MainFragment extends SherlockFragment  implements
             @Override
             public void onClick(View view) {
                 stopUpdates(view);
+            }
+        });
+        mLaunchGeofence.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), GeofenceActivity.class);
+                String[] latLng = mLatLng.getText().toString().split(",");
+                intent.putExtra(EXTRA_LAT, latLng[0]);
+                intent.putExtra(EXTRA_LNG, latLng[1]);
+                startActivityForResult(intent, REQUEST_GEOFENCE);
             }
         });
         return rootView;
